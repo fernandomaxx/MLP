@@ -1,2 +1,1 @@
-# MLP
 Minimum Latency Problem
