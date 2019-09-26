@@ -36,9 +36,9 @@ class Cache(object):
             Calculates the new Solution in the cost of the parts that were moved
             sigmas: a list of tuples, where each tuple contains a position in solution and the size of the solution
         '''
-        i,j = sigmas.pop(0)
+        i,j = sigmas[0]
         new_sol = self._table[i][j-1]
-        for i,j in sigmas:
+        for i,j in sigmas[1:]:
             new_sol += self._table[i][j-1]
         return new_sol
 
@@ -49,6 +49,9 @@ class SubSolution(object):
         self.T = T
         self.C = C
         self.W = W if start else 0
+
+        self.last = self.start
+
         self._adj_matrix = adj_matrix
         self._solution = solution
 
@@ -57,12 +60,16 @@ class SubSolution(object):
                 self.size + other.size,
                 self._adj_matrix, 
                 self._solution)
-        i = self._solution[self.start + self.size - 1]
-        j = self._solution[self.start + self.size]
+
+        i = self._solution[self.last]
+        j = self._solution[other.start]
         t = self._adj_matrix[i, j]
+
         sub_solution.T = self.T + t + other.T
         sub_solution.C = self.C + other.W * (self.T + t) + other.C
         sub_solution.W = self.W + other.W
+
+        sub_solution.last = other.last
 
         return sub_solution
 
