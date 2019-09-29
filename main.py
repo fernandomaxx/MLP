@@ -19,7 +19,6 @@ for i in range(0, 10):
     adj_matrix.insert(int(line[0]), int(line[2]), int(line[4]))
     adj_matrix.insert(int(line[2]), int(line[0]), int(line[4]))
 
-solution = []
 print(adj_matrix.p_matrix())
 ils = ILS(adj_list.p_list(), adj_matrix.p_matrix(), 1, 2)
 print(ils.procedure())
