@@ -1,5 +1,4 @@
-from heapq import heapify, heappop, heappush
-from random import randrange
+from random import randint
 
 
 class GreddyConstruction(object):
@@ -11,12 +10,10 @@ class GreddyConstruction(object):
     def build(self, alfa, solution, origin=0):
         processed = [False for i in range(self.size)]
         pq = [(0, origin)]
-        heapify(pq)
 
         while pq:
-            print(pq)
-            index = randrange(0, alfa * (len(pq) - 1) + 1)
-            u = pq[index][1]
+            index = randint(0, int(alfa * len(pq))) - 1
+            u = pq[0 if index < 0 else index][1]
             solution.append(u)
             processed[u] = True
             pq.clear()
@@ -25,6 +22,8 @@ class GreddyConstruction(object):
                 v = self.adj_list[u][i][0]
                 if not processed[v]:
                     cost = self.adj_list[u][i][1]
-                    heappush(pq, (cost, v))
+                    pq.append((cost, v))
+            
+            pq.sort()
 
-        solution.append(self.size)
+        solution.append(0)
