@@ -1,6 +1,5 @@
 
-
-class AdjacencyList():
+class AdjacencyList(object):
 
     def __init__(self, size):
         self.__list_adj = [[] for _ in range(size)]
