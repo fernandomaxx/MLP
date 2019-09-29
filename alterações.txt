@@ -1,0 +1,48 @@
+#alterações shiftn
+
+best_ = best = self._cache.compare([(0, len(solution))])
+adicionei o best_ só para verificar se melhorou a solucação no fim
+
+[(0, len(solution))] coloquei isso aqui considerando ques estamos trabalhando apenas com indices, então
+a solução inicial é representada por esse par de indices. Outro motivo é que no final estava com problema
+caso uma solução melhor não fosse encontrada, já que o loop que converte os indices em uma solução no final 
+esperava uma lista com tupla de indices e o que chegava para ele nesse caso era lista de inteiros.
+
+#debug
+                print('---------------')
+                print('{} {}'.format(best.C, aux.C))
+                a = idxToList(best_sol, solution)
+                b = idxToList(sol, solution)
+                mtx = self._cache.getG()
+                print('{} {}'.format(f(a, mtx), f(b, mtx)))
+                print('---------------')
+
+O trecho acima coloquei para compara o resultado do custo que a estrutura mostra com  o cálculo  mais fácil, porém
+menos eficiente do custo apenas para debugar.
+
+
+self._cache.getG()
+
+Isso aqui foi só para obter o grafo sem alterar muita coisa no código e pode ser removido depois que estiver concluído.
+
+return True
+solution[:] = sol[:]
+
+Alterei o retorno para que o rvnd saiba quando uma solução melhor for encontrada e já coloquei para alterar
+a solução dentro do movimento
+
+
+
+#alterações adjacency_matrix
+
+def setGraph(self, mtx_adj):
+
+adicionei essa função para quando for pegar os grafos da tsplib
+
+
+#tools
+
+A função f é para calcular o custo e a outra converte de indices para lista.
+
+
+
