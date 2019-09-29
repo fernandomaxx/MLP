@@ -42,6 +42,10 @@ class Cache(object):
             new_sol += self._table[i][j-1]
         return new_sol
 
+    #temp
+    def getG(self):
+        return self._adj_matrix
+
 class SubSolution(object):
     def __init__(self, start, size, adj_matrix, solution, T=0, C=0, W=1):
         self.start = start
