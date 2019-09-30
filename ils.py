@@ -2,6 +2,8 @@ from greedy_construction import GreddyConstruction
 from rvnd import RVND
 from tools import f
 
+import numpy as np
+
 class ILS(object):
 
     def __init__(self, adj_list, adj_matrix, Max, MaxIls):
@@ -13,7 +15,7 @@ class ILS(object):
             len(adj_matrix))
 
     def procedure(self):
-        best_ = 100000
+        best_ = np.Inf
         best_sol = []
 
         for _ in range(self.Max):
