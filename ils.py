@@ -6,13 +6,11 @@ import numpy as np
 
 class ILS(object):
 
-    def __init__(self, adj_list, adj_matrix, Max, MaxIls):
+    def __init__(self, adj_matrix, Max, MaxIls):
         self.Max = Max
         self.MaxIls = MaxIls
-        self._adj_list = adj_list
         self._adj_matrix = adj_matrix
-        self.gd = GreddyConstruction(adj_list,
-            len(adj_matrix))
+        self.gd = GreddyConstruction(adj_matrix, len(adj_matrix))
 
     def procedure(self):
         best_ = np.Inf
