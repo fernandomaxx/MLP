@@ -20,18 +20,18 @@ class TwoOpt(Neighborhood):
                 sol.append((j + 1, len(solution) - (j + 1)))
 
                 #debug
-                print(sol)
+#                print(sol)
                 
                 aux = self._cache.compare(sol)
 
                 #debug
-                print('---------------')
-                print('{} {}'.format(best.C, aux.C))
-                a = idxToList(best_sol, solution)
-                b = idxToList(sol, solution)
-                mtx = self._cache.getG()
-                print('{} {}'.format(f(a, mtx), f(b, mtx)))
-                print('---------------')
+#                print('---------------')
+#                print('{} {}'.format(best.C, aux.C))
+#                a = idxToList(best_sol, solution)
+#                b = idxToList(sol, solution)
+#                mtx = self._cache.getG()
+#                print('{} {}'.format(f(a, mtx), f(b, mtx)))
+#                print('---------------')
 
                 if best.C > aux.C:
                     best = aux

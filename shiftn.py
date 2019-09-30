@@ -7,7 +7,7 @@ class Shift(Neighborhood):
         self._cache = cache
         self.n = n
 
-    def execute(self, solution):
+    def execute(self, solution, force=False):
         best_ = best = self._cache.compare([(0, len(solution))])
         best_sol = [(0, len(solution))]
         for i in range(1, len(solution)-self.n):
@@ -29,7 +29,7 @@ class Shift(Neighborhood):
                         (i,self.n), # position of the shifted
                         (left_pos, mid_right_size),
                         (right_pos,right_size)]
-                print(sol)
+               # print(sol)
 
                 if right_size - 1 >= 0 and left_size == left_lim:
                     right_size -= 1; mid_left_size += 1
@@ -42,13 +42,13 @@ class Shift(Neighborhood):
                 aux = self._cache.compare(sol)
 
                 #debug
-                print('---------------')
-                print('{} {}'.format(best.C, aux.C))
-                a = idxToList(best_sol, solution)
-                b = idxToList(sol, solution)
-                mtx = self._cache.getG()
-                print('{} {}'.format(f(a, mtx), f(b, mtx)))
-                print('---------------')
+#                print('---------------')
+#                print('{} {}'.format(best.C, aux.C))
+#                a = idxToList(best_sol, solution)
+#                b = idxToList(sol, solution)
+#                mtx = self._cache.getG()
+#                print('{} {}'.format(f(a, mtx), f(b, mtx)))
+#                print('---------------')
 
 
                 if best.C > aux.C:
@@ -60,7 +60,7 @@ class Shift(Neighborhood):
 #        print(best_sol)
 #        print(solution)
 
-        if best_.C > best.C:
+        if best_.C > best.C or force:
             for i,j in best_sol:
                 if j:
                     for k in solution[i:i+j]:
