@@ -39,7 +39,8 @@ class Cache(object):
         i,j = sigmas[0]
         new_sol = self._table[i][j-1]
         for i,j in sigmas[1:]:
-            new_sol += self._table[i][j-1]
+            if j:
+                new_sol += self._table[i][j-1]
         return new_sol
 
     #temp
