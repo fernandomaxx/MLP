@@ -14,7 +14,7 @@ class RVND(object):
     def execute(self):
         #debug
 #        print(self.solution)
-        N = [Shift(self._cache), Shift(self._cache, 2), 
+        N = [Shift(self._cache), Shift(self._cache, 2),
             Shift(self._cache, 3),Swap(self._cache), TwoOpt(self._cache)]
         N_aux = []
 
