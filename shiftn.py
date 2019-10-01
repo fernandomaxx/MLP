@@ -11,6 +11,7 @@ class Shift(Neighborhood):
         best_ = best = self._cache.compare([(0, len(solution))])
         best_sol = [(0, len(solution))]
         for i in range(1, len(solution)-self.n):
+            # (0,)()(i)()(,len)
             right_lim = len(solution) - i - self.n
             left_lim  = len(solution) - right_lim - self.n 
 
@@ -23,13 +24,12 @@ class Shift(Neighborhood):
             right_pos = len(solution) - right_size
             left_pos = 1
 
-            for j in range(len(solution) - 1 - self.n):
+            for _ in range(len(solution) - 1 - self.n):
                 sol = [(0, left_size),
                         (i+self.n, mid_left_size),
                         (i,self.n), # position of the shifted
                         (left_pos, mid_right_size),
                         (right_pos,right_size)]
-               # print(sol)
 
                 if right_size - 1 >= 0 and left_size == left_lim:
                     right_size -= 1; mid_left_size += 1
