@@ -4,7 +4,7 @@ from tools import f
 from shiftn import Shift
 from cache import Cache
 from verbosity import Verbosity
-from random import shuffle
+from random import shuffle, choice
 
 import numpy as np
 
@@ -24,6 +24,9 @@ class ILS(object):
         best_ = np.Inf
         best_sol = []
 
+        self.gd.build(self.greedyness, best_sol)
+        best_ = f(best_sol, self._adj_matrix)
+
         for iter in range(self.Max):
             new_sol = []
             self.gd.build(self.greedyness, new_sol)
@@ -32,12 +35,8 @@ class ILS(object):
             new_ = f(new_sol, self._adj_matrix)
             aux_sol = [i for i in new_sol]
             aux_ = new_
+            print('s=',aux_)
 
-            Verbosity.show(
-                    "{}/{} {}".format(iter + 1,
-                        self.Max,
-                        best_)
-                    )
             iterIls = 0
             while iterIls < self.MaxIls:
                 #debug
@@ -54,12 +53,19 @@ class ILS(object):
                     iterIls = 0
 
                 #falta a pertubação
-                pert = 10
-                r = np.random.randint(1,len(new_sol) - pert - 1)
-                x = new_sol[r:r + pert]
-                shuffle(x)
-                new_sol[r:r + pert] = x
+                n = 5
+                x = (len(aux_sol)) // n
+                s = [aux_sol[1:x],aux_sol[n*x:len(aux_sol) - 1]]
+                for i in range(1,n):
+                    a = choice([-1,1])
+                    s.append(aux_sol[i*x:(i+1)*x][::a])
+                shuffle(new_sol)
+                a = []
+                for e in s:
+                    a += e
+                new_sol =  [0] + a + [0]
                 new_ = f(new_sol, self._adj_matrix)
+                print("p =", new_)
 
                 iterIls += 1
 
@@ -67,6 +73,12 @@ class ILS(object):
                 best_sol = aux_sol
                 best_ = aux_
 
+            Verbosity.show(
+                "{}/{} b={} a={}".format(iter + 1,
+                                  self.Max,
+                                  best_,
+                                  aux_)
+            )
         return (best_sol, best_)
 
                 
