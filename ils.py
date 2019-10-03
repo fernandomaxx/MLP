@@ -55,8 +55,8 @@ class ILS(object):
                 #falta a pertubação
                 n = 5
                 x = (len(aux_sol)) // n
-                s = [aux_sol[1:x],aux_sol[n*x:len(aux_sol) - 1]]
-                for i in range(1,n):
+                s = [aux_sol[1:x],aux_sol[(n-1)*x:len(aux_sol) - 1]]
+                for i in range(1,n-1):
                     a = choice([-1,1])
                     s.append(aux_sol[i*x:(i+1)*x][::a])
                 shuffle(new_sol)

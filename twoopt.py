@@ -9,8 +9,8 @@ class TwoOpt(Neighborhood):
         best_ = best = self._cache.compare([(0, len(solution))])
         best_sol = [(0, len(solution))]
 
-        for i in range(1 , len(solution) - 1):
-            for j in range(i + 2 , len(solution) - 1):
+        for i in range(1 , len(solution) - 2):
+            for j in range(i , len(solution) - i):
 
                 sol = [(0, i)]
 
@@ -44,6 +44,7 @@ class TwoOpt(Neighborhood):
         if best_.C > best.C:
             for i,j in best_sol:
                 if j:
+                    j = abs(j)
                     for k in solution[i:i+j]:
                         sol.append(k)
             solution[:] = sol[:]
