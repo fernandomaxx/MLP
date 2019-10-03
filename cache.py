@@ -39,8 +39,10 @@ class Cache(object):
         i,j = sigmas[0]
         new_sol = self._table[i][j-1]
         for i,j in sigmas[1:]:
-            if j:
+            if j > 0:
                 new_sol += self._table[i][j-1]
+            elif j < 0:
+                new_sol += (-self._table[i][(-j)-1])
         return new_sol
 
     #temp
@@ -76,6 +78,17 @@ class SubSolution(object):
 
         sub_solution.last = other.last
 
+        return sub_solution
+
+    def __neg__(self):
+        sub_solution = SubSolution(self.last, 
+                self.size,
+                self._adj_matrix,
+                self._solution,
+                self.T,
+                self.C,
+                self.W)
+        sub_solution.last = self.start
         return sub_solution
 
     def __str__(self):

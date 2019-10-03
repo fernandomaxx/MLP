@@ -14,6 +14,7 @@ class TwoOpt(Neighborhood):
 
                 sol = [(0, i)]
 
+#                sol.append((i, -j))
                 for k in range(j, i - 1, -1):
                     sol.append((k, 1))
 
@@ -22,6 +23,7 @@ class TwoOpt(Neighborhood):
                 #debug
 #                print(sol)
                 
+                a = self._cache.compare(best_sol)
                 aux = self._cache.compare(sol)
 
                 #debug
